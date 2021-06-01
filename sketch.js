@@ -289,9 +289,9 @@ pacman.scale = 0.2;
   ob2.shapeColor = "yellow";
   ob3 = createSprite(140,100,70,15);
   ob3.shapeColor = "white";
-  ob4 = createSprite(660,100,300,15);
+  ob4 = createSprite(660,105,300,15);
   ob4.shapeColor = "white";
-  ob5 = createSprite(1080,100,100,15);
+  ob5 = createSprite(1080,110,100,15);
   ob5.shapeColor = "white";
   ob6 = createSprite(1300,100,70,15);
   ob6.shapeColor = "white";
@@ -509,11 +509,16 @@ function draw() {
     ghost3.bounceOff(ob6);
     ghost3.bounceOff(ob7);
     ghost3.bounceOff(ob8);
-    ghost3.bounceOff(boundary3);
-    ghost3.bounceOff(boundary4);
+    //ghost3.bounceOff(boundary3);
+    //ghost3.bounceOff(boundary4);
+   
   }
   if(ghost3.isTouching(boundary1)){
     ghost3.velocityX = -3;
+    ghost3.velocityY = 0.05;
+  }
+  if(ghost3.isTouching(ob3)){
+    ghost3.velocityX = 3;
     ghost3.velocityY = 0;
   }
   if(ghost3.isTouching(nb)){
