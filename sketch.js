@@ -12,7 +12,11 @@ var pb1,pb2,pb3,pb4,ab1,ab2,ab3,ab4,cb1,cb2,cb3,cb4;
 var hb,mb,Ab,nb;
 var ob1,ob2,ob3,ob4,ob5,ob6,ob7,ob8,ob9,ob10,ob11,ob12,ob13;
 var lives = 3;
-var fruits,fruitsImg,fruitsGroup;
+var f=400;
+var dot1,dotGroup;
+var fruits=[];
+var position=[];
+var fruitsImg,fruitsGroup;
 var gameover,gameoverImg;
 
 function preload(){
@@ -124,25 +128,20 @@ pacman.addImage("eating",pacmanImg);
 pacman.scale = 0.2;
 
   //fruits
- // for(var f = 400; f<1080; f = f+50){
-    fruits = createSprite(400,510,20,20);
-    fruits.addImage(fruitsImg);
-    fruits.scale = 0.5;
-    
-    
-  //} 
- 
   
   
-  /*
+  
+  
+  
   for(var v = 80; v<1350; v = v+50){
     fruits2 = createSprite(v,345,20,20);
     fruits2.addImage(fruitsImg);
     fruits2.scale = 0.5;
-    if(pacman.isTouching(fruits2)){
-      fruits2.destroy();
-    }
+    fruits.push(fruits2);
+    console.log(fruits);
+   
   }
+  /*
   for(var w = 60; w<350; w = w+50){
     fruits3 = createSprite(230,w,20,20);
     fruits3.addImage(fruitsImg);
@@ -309,17 +308,21 @@ pacman.scale = 0.2;
   ob12.visible = false;
   ob13 = createSprite(1105,305,20,20)
   ob13.visible = false;
+  
+  
 
 }
 
 function draw() {
   background(0); 
+  for(var i=0;i<fruits.length;i++) {
+    if(pacman.isTouching(fruits[i])){
+      fruits[i].destroy();
+    }
+  }
+ 
   
-   if(pacman.isTouching(fruits)){
-    fruits.remove();
   
-}
-
   textSize(20);
   fill(255);
   text(mouseX + "," + mouseY,700,400);
@@ -568,15 +571,20 @@ if(gameState === END){
   ghost4.velocityY = 0;
   gameover = createSprite(700,250,50,50);
   gameover.addImage(gameoverImg);
-  if(keyCode===32){
-    reset();
+  if(keyWentDown==="space" && gameState===END){
+    gameState=PLAY;
+    gameover.visible=false;
   }
 }
 
   drawSprites();
 }
 
-function reset(){
+/*function reset(){
   gameState = PLAY;
   gameover.visible = false;
 }
+function keyPressed(){
+  if(keyCode===32){
+    reset();
+  }*/
